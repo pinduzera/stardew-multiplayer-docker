@@ -6,7 +6,12 @@ ENV APP_NAME="StardewValley"
 
 RUN apt-get update && apt-get install -y wget unzip tar strace mono-complete xterm gettext-base jq netcat procps && apt-get clean
 
-# TODO: Copy local user game files 
+### Use GOG's Stardew Valley Linux build. 
+### Add the stardew Tar.gz instllation to the same folder as this file
+### Replace the name "Stardew_Valley_latest.tar.gz" for your compressed file name. (or rename it)
+COPY Stardew_Valley_latest.tar.gz /data/latest.tar.gz
+RUN tar xf /data/latest.tar.gz -C /data/Stardew && \
+    rm /data/latest.tar.gz
 
 RUN wget -qO dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/d4b71fac-a2fd-4516-ac58-100fb09d796a/e79d6c2a8040b59bf49c0d167ae70a7b/dotnet-sdk-5.0.408-linux-arm64.tar.gz &&\
      tar -zxf dotnet.tar.gz -C /usr/share/dotnet &&\
